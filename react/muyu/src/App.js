@@ -1,6 +1,7 @@
 import * as React from "react";
 import {ethers} from 'ethers';
 import Muyu from './artifacts/contracts/Muyu.sol/Muyu.json';
+import main_image from './img/muyu.png';
 // import exp from "constants";
 
 const MUYU_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
@@ -8,7 +9,9 @@ const MUYU_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 export class App extends React.Component {
   constructor(props) {
       super(props);
-      this.state = {Gongde: 0}
+      this.state = {
+        Gongde: 0,
+    }
   }
 
 
@@ -43,7 +46,6 @@ export class App extends React.Component {
           console.log(transaction);
         //   console.log("Data: ", contract.getGongde());
           await transaction.wait();
-          
           this.fetchGongde();
       }
   }
@@ -53,12 +55,37 @@ export class App extends React.Component {
   }
 
   render() {
+    const img_style = {
+        display: "flex",
+        width: "350px",
+        height: "268px",
+        position: "relative",
+        backgroundColor: "black",
+        borderColor: "black",
+        outline: "none",
+    };
+    const div_style_row = {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "black",
+        height: "100vh",
+        color: "white",
+    };
+    const div_style_col = {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        padding: "50px"
+    };
     return (
-        <div>
-            <h1>Gongde: {this.state.Gongde.toString()}</h1>
-            <button onClick={()=>this.fetchGongde()}>View Gongde</button>
-            <hr/>
-            <button onClick={()=>this.addGongde()}>Qiao to Get Gongde</button>
+        <div style={div_style_row}>
+            <div style={div_style_col}>
+                <img className = "muyu_img" onClick={()=>this.addGongde()} src= {main_image} alt ="Gongde: " style={img_style}></img>
+                <h1>Gongde: {this.state.Gongde.toString()}</h1>
+            </div>
+            <div style={div_style_col}><p>NFT PLACE</p></div>
         </div>
     )
   }
