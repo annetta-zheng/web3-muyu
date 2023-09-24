@@ -7,20 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 // import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Muyu is ERC721, ERC721URIStorage {
-    uint gongdeBalance;
-
-    constructor() ERC721("GongdeNFT", "GDE") {
-        gongdeBalance = 0;
-    }
-
-    function getGongde() public view returns (uint) {
-        return gongdeBalance;
-    }
-
-    function qiao() public {
-        gongdeBalance += 1;
-        console.log(gongdeBalance);
-    }
+    constructor() ERC721("GongdeNFT", "GDE") {}
 
     // NFT related methods
     // function safeMint(address to, uint256 tokenId, string memory uri)
