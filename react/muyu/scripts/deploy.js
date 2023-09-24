@@ -13,7 +13,8 @@ async function main() {
   );
 
   const Muyu = await hre.ethers.getContractFactory("Muyu");
-  const muyu = await Muyu.deploy();
+  const muyu = await Muyu.deploy({gasPrice: hre.ethers.utils.parseUnits("800", 'gwei')});
+  console.log(muyu);
 
   await muyu.deployed();
 

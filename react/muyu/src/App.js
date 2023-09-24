@@ -20,11 +20,21 @@ export class App extends React.Component {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const contract = new ethers.Contract(MUYU_ADDRESS, Muyu.abi, provider);
 
-        //try to get the greeting in the contract
         try {
             const data = await contract.getGongde();
             this.setState({Gongde: data});
-            // console.log("Data: ", data);
+        } catch (e) {
+            console.log("Err: ", e)
+        }
+      }
+  }
+  async qiao() {
+    if (typeof window.ethereum !== "undefined") {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const contract = new ethers.Contract(MUYU_ADDRESS, Muyu.abi, provider);
+        try {
+            const data = await contract.getGongde();
+            this.setState({Gongde: data});
         } catch (e) {
             console.log("Err: ", e)
         }
@@ -33,20 +43,23 @@ export class App extends React.Component {
 
   async addGongde() {
       if (typeof window.ethereum !== "undefined") {
-          //ethereum is usable, get reference to the contract
           await this.requestAccount();
           const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-          //signer needed for transaction that changes state
           const signer = provider.getSigner();
-          const contract = new ethers.Contract(MUYU_ADDRESS, Muyu.abi, signer);
 
-          //preform transaction
-          const transaction = await contract.qiao();
-          console.log(transaction);
-        //   console.log("Data: ", contract.getGongde());
-          await transaction.wait();
-          this.fetchGongde();
+          try {
+            const contract = new ethers.Contract(MUYU_ADDRESS, Muyu.abi, signer);
+
+            const transaction = await contract.qiao();
+            console.log(transaction);
+            //   console.log("Data: ", contract.getGongde());
+            await transaction.wait();
+            this.fetchGongde();
+          } catch (e) {
+              console.log("Err: ", e);
+          }
+          
       }
   }
 
@@ -86,7 +99,7 @@ export class App extends React.Component {
                 <h1>Gongde: {this.state.Gongde.toString()}</h1>
             </div>
             <div style={div_style_col}><p>NFT PLACE</p></div>
-        </div>
+        </div>    
     )
   }
 }
