@@ -41,8 +41,14 @@ export class App extends React.Component {
   async createNFT() {
     // make the NFT metadata JSON and owner
     // const metadata = await this.makeNFTMetadata(PIC_URI, options)
+    
+ this.sendCreateNFTTx().then((result) => {}, (error) => {
+    console.log("error: ", error);
+  })
+}
+async sendCreateNFTTx() {
+    
     const ownerAddress = await this.defaultOwnerAddress();
-
     // Call the mintToken method to issue a new token to the given address
     // This returns a transaction object, but the transaction hasn't been confirmed
     // yet, so it doesn't have our token id.
@@ -62,9 +68,9 @@ export class App extends React.Component {
             console.log('ignoring unknown event type ', event.event);
             continue;
         }
+        console.log("event.args.tokenId: ", event.args.tokenId);
         return event.args.tokenId;
     }
-
     throw new Error('unable to get token id')
   }
 
@@ -127,8 +133,11 @@ export class App extends React.Component {
                 <img className = "muyu_img" onClick={()=>this.addGongde()} src= {main_image} alt ="Gongde: " style={img_style}></img>
                 <h1>Gongde: {this.state.Gongde.toString()}</h1>
             </div>
-            <div style={div_style_col}><p>NFT PLACE</p></div>
-            <button onClick={()=>this.createNFT()}>Mint NFT</button>
+            <div style={div_style_col}>
+                <p>NFT PLACE</p>
+                <button onClick={()=>this.createNFT()}>Mint NFT</button>
+            </div>
+            
         </div>    
     )
   }

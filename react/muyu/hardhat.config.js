@@ -29,11 +29,15 @@ const privateKeys = [
  */
 module.exports = {
   solidity: "0.8.19",
-  defaultNetwork: "neonlabs",
+  defaultNetwork: "hardhat",
   paths: {
     artifacts: "./src/artifacts",
   },
   networks: {
+    
+    hardhat: {
+      chainId: 31337
+    },
     neonlabs: {
       url: proxy_url,
       accounts: privateKeys,
@@ -43,9 +47,6 @@ module.exports = {
       timeout: 1000000,
       isFork: true
     },
-    hardhat: {
-      chainId: 31337
-    }
   },
   
 };
