@@ -12,12 +12,10 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 // NEON 
 const proxy_url = 'https://devnet.neonevm.org';
-const network_id = 245022926;
+const network_id = ;
 
 const privateKeys = [
-  "0x3ac36c94ac3c318de5d2d0fe64e088db23acd5537d7b730c826341339d076459", 
   // firefox
-  "0x0014bb03e18b71ff5a91fda01ebde7e73775b132c0a73b9c42dfc79b8a9407a9"
   // chrome
 ];
 
